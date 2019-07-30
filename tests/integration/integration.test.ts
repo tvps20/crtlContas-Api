@@ -19,6 +19,7 @@ describe('Testes de Integração', () => {
             .get('/api/users')
             .end((error, res) => {
                 expect(res.status).to.equal(200);
+                done(error);
             })
         });
     });
@@ -29,6 +30,7 @@ describe('Testes de Integração', () => {
             .get(`/api/users/${1}`)
             .end((error, res) => {
                 expect(res.status).to.equal(200);
+                done(error);
             })
         });
     });
@@ -42,6 +44,7 @@ describe('Testes de Integração', () => {
             .send(user)
             .end((error, res) => {
                 expect(res.status).to.equal(200);
+                done(error);
             })
         });
     });
@@ -55,6 +58,7 @@ describe('Testes de Integração', () => {
             .send(user)
             .end((error, res) => {
                 expect(res.status).to.equal(200);
+                done(error);
             })
         });
     });
@@ -65,6 +69,7 @@ describe('Testes de Integração', () => {
             .delete(`/api/users/${1}`)
             .end((error, res) => {
                 expect(res.status).to.equal(200);
+                done(error);
             })
         });
     });
