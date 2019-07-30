@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var HTTPStatus = require("http-status");
 var helpers_1 = require("./config/helpers");
 describe('Testes de Integração', function () {
     describe('GET /', function () {
@@ -7,7 +8,7 @@ describe('Testes de Integração', function () {
             helpers_1.request(helpers_1.app)
                 .get('/')
                 .end(function (error, res) {
-                helpers_1.expect(res.status).to.equal(200);
+                helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 helpers_1.expect(res.text).to.equal('Hello, world!');
                 done(error);
             });
@@ -18,17 +19,7 @@ describe('Testes de Integração', function () {
             helpers_1.request(helpers_1.app)
                 .get('/api/users')
                 .end(function (error, res) {
-                helpers_1.expect(res.status).to.equal(200);
-                done(error);
-            });
-        });
-    });
-    describe('GET /api/users/:id', function () {
-        it('Deve retornar um json com um usuário', function (done) {
-            helpers_1.request(helpers_1.app)
-                .get("/api/users/" + 1)
-                .end(function (error, res) {
-                helpers_1.expect(res.status).to.equal(200);
+                helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 done(error);
             });
         });
@@ -40,7 +31,17 @@ describe('Testes de Integração', function () {
                 .post('/api/users')
                 .send(user)
                 .end(function (error, res) {
-                helpers_1.expect(res.status).to.equal(200);
+                helpers_1.expect(res.status).to.equal(HTTPStatus.CREATED);
+                done(error);
+            });
+        });
+    });
+    describe('GET /api/users/:id', function () {
+        it('Deve retornar um json com um usuário', function (done) {
+            helpers_1.request(helpers_1.app)
+                .get("/api/users/" + 1)
+                .end(function (error, res) {
+                helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 done(error);
             });
         });
@@ -52,7 +53,7 @@ describe('Testes de Integração', function () {
                 .put("/api/users/" + 1)
                 .send(user)
                 .end(function (error, res) {
-                helpers_1.expect(res.status).to.equal(200);
+                helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 done(error);
             });
         });
@@ -62,7 +63,7 @@ describe('Testes de Integração', function () {
             helpers_1.request(helpers_1.app)
                 .delete("/api/users/" + 1)
                 .end(function (error, res) {
-                helpers_1.expect(res.status).to.equal(200);
+                helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 done(error);
             });
         });
