@@ -6,6 +6,8 @@
   "scripts": {
     "start": "set node_env=development && ts-node ./server/server.ts",
     "builded": "set node_env=development && node ./build/server.js",
+    "unit-test": "set node_env=test && mocha --opts ./build/tests/unit/config/mocha.opts ./build/tests/unit/unit.test.js",
+    "integration-test": "set node_env=test && mocha --opts ./build/tests/integration/config/mocha.opts ./build/tests/integration/integration.test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "tvSantiago",
@@ -21,9 +23,16 @@
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
+    "@types/chai": "^4.1.7",
     "@types/express": "^4.17.0",
+    "@types/mocha": "^5.2.7",
     "@types/morgan": "^1.7.36",
     "@types/sequelize": "^4.28.4",
+    "@types/supertest": "^2.0.8",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "supertest": "^4.0.2",
+    "testdouble": "^3.12.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   }
