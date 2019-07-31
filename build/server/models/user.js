@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function default_1(sequelize, DataTypes) {
-    var User = sequelize.define('User', {
+    var User = sequelize.define('Users', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
