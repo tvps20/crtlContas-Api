@@ -15,7 +15,7 @@ var UserService = /** @class */ (function () {
             .then(interface_1.createUsers);
     };
     UserService.prototype.getById = function (id) {
-        return model.Users.findOne({
+        return model.User.findOne({
             where: { id: id }
         })
             .then(interface_1.createUserById);

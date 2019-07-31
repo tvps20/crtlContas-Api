@@ -6,7 +6,7 @@ describe('Testes de Integração', function () {
     // Faz com que seja executado no modo extrito para a engine do node entenda as variaveis (let, const, var).
     'use strict';
     var config = require('../../server/config/env/config')();
-    var models = require('../../server/models');
+    var db = require('../../server/models');
     var id;
     var userTest = {
         id: 100,
@@ -19,14 +19,14 @@ describe('Testes de Integração', function () {
         password: 'teste'
     };
     beforeEach(function (done) {
-        models.User.destroy({
+        db.User.destroy({
             where: {}
         })
             .then(function () {
-            return models.User.create(userDefault);
+            return db.User.create(userDefault);
         })
             .then(function (user) {
-            models.User.create(userTest)
+            db.User.create(userTest)
                 .then(function () {
                 done();
             });
@@ -92,8 +92,7 @@ describe('Testes de Integração', function () {
                 .send(user)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
-                helpers_1.expect(res.body.payload.id).to.equal(id);
-                helpers_1.expect(res.body.payload.id).to.equal(user.email);
+                helpers_1.expect(res.body.payload[0]).to.eql(1);
                 done(error);
             });
         });
@@ -104,6 +103,7 @@ describe('Testes de Integração', function () {
                 .delete("/api/users/" + id)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.payload).to.eql(1);
                 done(error);
             });
         });

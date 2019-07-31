@@ -6,7 +6,7 @@ describe('Testes de Integração', () => {
     // Faz com que seja executado no modo extrito para a engine do node entenda as variaveis (let, const, var).
     'use strict';
     const config = require('../../server/config/env/config')();
-    const models = require('../../server/models');
+    const db = require('../../server/models');
 
     let id;
 
@@ -23,14 +23,14 @@ describe('Testes de Integração', () => {
     };
 
     beforeEach((done) => {
-        models.User.destroy({
+        db.User.destroy({
             where: {}
         })
         .then(() => {
-            return models.User.create(userDefault);
+            return db.User.create(userDefault);
         })
         .then(user => {
-            models.User.create(userTest)
+            db.User.create(userTest)
                 .then(() => {
                     done();
                 })
@@ -103,8 +103,7 @@ describe('Testes de Integração', () => {
             .send(user)
             .end((error, res) => {
                 expect(res.status).to.equal(HTTPStatus.OK);
-                expect(res.body.payload.id).to.equal(id);
-                expect(res.body.payload.id).to.equal(user.email);
+                expect(res.body.payload[0]).to.eql(1);
                 done(error);
             })
         });
@@ -116,6 +115,7 @@ describe('Testes de Integração', () => {
             .delete(`/api/users/${id}`)
             .end((error, res) => {
                 expect(res.status).to.equal(HTTPStatus.OK);
+                expect(res.body.payload).to.eql(1);
                 done(error);
             })
         });

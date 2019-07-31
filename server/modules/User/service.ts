@@ -21,7 +21,7 @@ class UserService implements IUser {
     }
 
     getById(id: number): Bluebird<IUserDetail>{
-        return model.Users.findOne({
+        return model.User.findOne({
             where: {id}
         })
         .then(createUserById);
