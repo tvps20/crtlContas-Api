@@ -1,8 +1,8 @@
-import { IUser, IUserDetail, createUser, createUserById, createUserByEmail } from './interface';
+import { IUser, IUserDetail, createUsers, createUserById, createUserByEmail } from './interface';
 import * as Bluebird from 'bluebird';
 const model = require('../../models');
 
-class User implements IUser {
+class UserService implements IUser {
     public id: number;
     public email: string;
     public password: string;
@@ -17,11 +17,11 @@ class User implements IUser {
         return model.User.findAll({
             order: ['email']
         })
-        .then(createUser);
+        .then(createUsers);
     }
 
     getById(id: number): Bluebird<IUserDetail>{
-        return model.User.findOne({
+        return model.Users.findOne({
             where: {id}
         })
         .then(createUserById);
@@ -51,4 +51,4 @@ class User implements IUser {
     }
 }
 
-export default User;
+export default UserService;

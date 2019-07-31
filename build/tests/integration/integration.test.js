@@ -14,7 +14,7 @@ describe('Testes de Integração', function () {
         password: 'teste'
     };
     var userDefault = {
-        id: 100,
+        id: 101,
         email: 'default@email.com',
         password: 'teste'
     };

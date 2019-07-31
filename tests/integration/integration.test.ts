@@ -17,7 +17,7 @@ describe('Testes de Integração', () => {
     };
 
     const userDefault = {
-        id: 100,
+        id: 101,
         email: 'default@email.com',
         password: 'teste'
     };
