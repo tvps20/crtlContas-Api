@@ -1,6 +1,6 @@
 import { IUser, IUserDetail, createUsers, createUserById, createUserByEmail } from './interface';
 import * as Bluebird from 'bluebird';
-const model = require('../../models');
+const db = require('../../models');
 
 class UserService implements IUser {
     public id: number;
@@ -10,32 +10,32 @@ class UserService implements IUser {
     constructor(){}
 
     create(user: any){
-        return model.User.create(user);
+        return db.User.create(user);
     }
 
     getAll(): Bluebird<IUser[]>{
-        return model.User.findAll({
+        return db.User.findAll({
             order: ['email']
         })
         .then(createUsers);
     }
 
     getById(id: number): Bluebird<IUserDetail>{
-        return model.User.findOne({
+        return db.User.findOne({
             where: {id}
         })
         .then(createUserById);
     }
 
     getByEmail(email: string): Bluebird<IUserDetail>{
-        return model.User.findOne({
+        return db.User.findOne({
             where: {email}
         })
         .then(createUserByEmail);
     }
 
     update(id: number, user: any){
-        return model.User.update(user, {
+        return db.User.update(user, {
             where: {id},
             // Atualiza apenas esses campos
             fildes: [
@@ -45,7 +45,7 @@ class UserService implements IUser {
     }
 
     delete(id: number){
-        return model.User.destroy({
+        return db.User.destroy({
             where: {id}
         });
     }
