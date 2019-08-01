@@ -4,12 +4,15 @@ import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import Routes from './routes/routes';
 import { errorHandlerApi } from './erros/errorHandlerApi';
+import AuthConfing from '../auth';
 
 class Api {
     public express: Application;
+    public auth;
 
     constructor(){
         this.express = express();
+        this.auth = AuthConfing();
         this.middleware();
     }
 
@@ -19,11 +22,12 @@ class Api {
         this.express.use(bodyParser.urlencoded({ extended: true}));
         this.express.use(bodyParser.json());
         this.express.use(errorHandlerApi);
-        this.router(this.express);
+        this.express.use(this.auth.initialize());
+        this.router(this.express, this.auth);
     }
 
-    private router(app: Application){
-        new Routes(app);
+    private router(app: Application, auth: any): void{
+        new Routes(app, auth);
     }
 }
 

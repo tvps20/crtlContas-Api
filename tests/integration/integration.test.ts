@@ -1,5 +1,7 @@
+import * as jwt from 'jwt-simple';
 import * as HTTPStatus from 'http-status';
 import { app, request, expect } from './config/helpers';
+import user from '../../server/models/user';
 
 describe('Testes de Integração', () => {
 
@@ -9,12 +11,13 @@ describe('Testes de Integração', () => {
     const db = require('../../server/models');
 
     let id;
+    let token;
 
     const userTest = {
         id: 100,
         name: 'test',
         email: 'test@email.com',
-        password: 'teste'
+        password: '123'
     };
 
     const userDefault = {
@@ -34,6 +37,7 @@ describe('Testes de Integração', () => {
             .then(user => {
                 db.User.create(userTest)
                     .then(() => {
+                        token = jwt.encode({id: user.id}, config.secret);
                         done();
                     })
             })
@@ -51,10 +55,47 @@ describe('Testes de Integração', () => {
         });
     });
 
+    describe('POST /token', () => {
+        it('Deve receber um JWT', done => {
+            const credentials = {
+                email: userDefault.email,
+                password: userDefault.password
+            };
+
+            request(app)
+            .post('/token')
+            .send(credentials)
+            .end((error, res) => {
+                expect(res.status).to.equal(HTTPStatus.OK);
+                expect(res.body.token).to.equal(`${token}`);
+                done(error);
+            })
+        });
+
+        it('Não deve gerar Token', done => {
+            const credentials = {
+                email: 'errado@emal.com',
+                password: 'errado'
+            };
+
+            request(app)
+            .post('/token')
+            .send(credentials)
+            .end((error, res) => {
+                expect(res.status).to.equal(HTTPStatus.UNAUTHORIZED);
+                expect(res.body).to.empty;
+                done(error);
+            })
+        })
+    });
+
+
     describe('GET /api/users', () => {
         it('Deve retornar um Array com todos os usuários', done => {
             request(app)
                 .get('/api/users')
+                .set('Content-Type', 'application/json')
+                .set('Authorization', `jwt ${token}`)
                 .end((error, res) => {
                     expect(res.status).to.equal(HTTPStatus.OK);
                     expect(res.body.payload).to.be.an('array');
@@ -70,6 +111,8 @@ describe('Testes de Integração', () => {
 
             request(app)
                 .post('/api/users')
+                .set('Content-Type', 'application/json')
+                .set('Authorization', `JWT ${token}`)
                 .send(user)
                 .end((error, res) => {
                     expect(res.status).to.equal(HTTPStatus.CREATED);
@@ -84,6 +127,8 @@ describe('Testes de Integração', () => {
         it('Deve retornar um json com um usuário', done => {
             request(app)
                 .get(`/api/users/${userDefault.id}`)
+                .set('Content-Type', 'application/json')
+                .set('Authorization', `JWT ${token}`)
                 .end((error, res) => {
                     expect(res.status).to.equal(HTTPStatus.OK);
                     expect(res.body.payload.id).to.equal(userDefault.id)
@@ -102,6 +147,8 @@ describe('Testes de Integração', () => {
 
             request(app)
                 .put(`/api/users/${id}`)
+                .set('Content-Type', 'application/json')
+                .set('Authorization', `JWT ${token}`)
                 .send(user)
                 .end((error, res) => {
                     expect(res.status).to.equal(HTTPStatus.OK);
@@ -115,6 +162,8 @@ describe('Testes de Integração', () => {
         it('Deve deletar um usuário', done => {
             request(app)
                 .delete(`/api/users/${id}`)
+                .set('Content-Type', 'application/json')
+                .set('Authorization', `JWT ${token}`)
                 .end((error, res) => {
                     expect(res.status).to.equal(HTTPStatus.OK);
                     expect(res.body.payload).to.eql(1);
