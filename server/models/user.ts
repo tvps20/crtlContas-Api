@@ -7,6 +7,14 @@ export default function (sequelize, DataTypes) {
             autoIncrement: true
         },
 
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+
         email: {
             type: DataTypes.STRING,
             allowNull: false,

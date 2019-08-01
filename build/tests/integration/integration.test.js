@@ -10,11 +10,13 @@ describe('Testes de Integração', function () {
     var id;
     var userTest = {
         id: 100,
+        name: 'test',
         email: 'test@email.com',
         password: 'teste'
     };
     var userDefault = {
         id: 101,
+        name: 'default',
         email: 'default@email.com',
         password: 'teste'
     };
@@ -57,7 +59,7 @@ describe('Testes de Integração', function () {
     });
     describe('POST /api/users', function () {
         it('Deve crair um usuário', function (done) {
-            var user = { id: 2, email: 'usuario@email.com', password: 'novouser' };
+            var user = { id: 2, name: 'usuario', email: 'usuario@email.com', password: 'novouser' };
             helpers_1.request(helpers_1.app)
                 .post('/api/users')
                 .send(user)
@@ -77,7 +79,7 @@ describe('Testes de Integração', function () {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 helpers_1.expect(res.body.payload.id).to.equal(userDefault.id);
                 helpers_1.expect(res.body.payload).to.have.all.keys([
-                    'id', 'email', 'password'
+                    'id', 'name', 'email', 'password'
                 ]);
                 id = res.body.payload.id;
                 done(error);

@@ -6,6 +6,7 @@ describe('Testes Unitarios do Controller', () => {
 
     const defaultUser = {
         id: 1,
+        name: 'default',
         email: 'defaultuser@email.com',
         password: '1234'
     }
@@ -28,11 +29,12 @@ describe('Testes Unitarios do Controller', () => {
 
             return userService.create({
                 id: 2,
-                email: 'novo Usuario',
+                name: 'novo Usuario',
+                email: 'novousuario@email.com',
                 password: '1234'
             }).then(data => {
                 expect(data.dataValues).to.have.all.keys([
-                    'email', 'id', 'password', 'updatedAt', 'createdAt'
+                    'email', 'id', 'name', 'password', 'updatedAt', 'createdAt'
                 ])
             });
         })
@@ -59,7 +61,7 @@ describe('Testes Unitarios do Controller', () => {
             return userService.getAll().then(data => {
                 expect(data).to.be.an('array');
                 expect(data[0]).to.have.all.keys([
-                    'id', 'email', 'password'
+                    'id', 'email', 'name', 'password'
                 ])
             })
         })
@@ -71,7 +73,7 @@ describe('Testes Unitarios do Controller', () => {
 
             return userService.getById(defaultUser.id).then(data => {
                 expect(data).to.have.all.keys(
-                    ['email', 'id', 'password']
+                    ['email', 'id', 'name', 'password']
                 )
             })
         })
@@ -83,7 +85,7 @@ describe('Testes Unitarios do Controller', () => {
 
             return userService.getByEmail(defaultUser.email).then(data => {
                 expect(data).to.have.all.keys(
-                    ['email', 'id', 'password']
+                    ['email', 'id', 'name', 'password']
                 )
             })
         })

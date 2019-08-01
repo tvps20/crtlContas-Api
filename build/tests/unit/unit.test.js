@@ -6,6 +6,7 @@ var db = require('../../server/models');
 describe('Testes Unitarios do Controller', function () {
     var defaultUser = {
         id: 1,
+        name: 'default',
         email: 'defaultuser@email.com',
         password: '1234'
     };
@@ -25,11 +26,12 @@ describe('Testes Unitarios do Controller', function () {
             var userService = new service_1.default();
             return userService.create({
                 id: 2,
-                email: 'novo Usuario',
+                name: 'novo Usuario',
+                email: 'novousuario@email.com',
                 password: '1234'
             }).then(function (data) {
                 helpers_1.expect(data.dataValues).to.have.all.keys([
-                    'email', 'id', 'password', 'updatedAt', 'createdAt'
+                    'email', 'id', 'name', 'password', 'updatedAt', 'createdAt'
                 ]);
             });
         });
@@ -51,7 +53,7 @@ describe('Testes Unitarios do Controller', function () {
             return userService.getAll().then(function (data) {
                 helpers_1.expect(data).to.be.an('array');
                 helpers_1.expect(data[0]).to.have.all.keys([
-                    'id', 'email', 'password'
+                    'id', 'email', 'name', 'password'
                 ]);
             });
         });
@@ -60,7 +62,7 @@ describe('Testes Unitarios do Controller', function () {
         it('Deve retornar um usuario de acorto com o ID passado', function () {
             var userService = new service_1.default();
             return userService.getById(defaultUser.id).then(function (data) {
-                helpers_1.expect(data).to.have.all.keys(['email', 'id', 'password']);
+                helpers_1.expect(data).to.have.all.keys(['email', 'id', 'name', 'password']);
             });
         });
     });
@@ -68,7 +70,7 @@ describe('Testes Unitarios do Controller', function () {
         it('Deve retornar um usuario de acorto com o EMAIL passado', function () {
             var userService = new service_1.default();
             return userService.getByEmail(defaultUser.email).then(function (data) {
-                helpers_1.expect(data).to.have.all.keys(['email', 'id', 'password']);
+                helpers_1.expect(data).to.have.all.keys(['email', 'id', 'name', 'password']);
             });
         });
     });

@@ -12,12 +12,14 @@ describe('Testes de Integração', () => {
 
     const userTest = {
         id: 100,
+        name: 'test',
         email: 'test@email.com',
         password: 'teste'
     };
 
     const userDefault = {
         id: 101,
+        name: 'default',
         email: 'default@email.com',
         password: 'teste'
     };
@@ -64,7 +66,7 @@ describe('Testes de Integração', () => {
 
     describe('POST /api/users', () => {
         it('Deve crair um usuário', done => {
-            const user = { id: 2, email: 'usuario@email.com', password: 'novouser' }
+            const user = { id: 2, name: 'usuario', email: 'usuario@email.com', password: 'novouser' }
 
             request(app)
                 .post('/api/users')
@@ -86,7 +88,7 @@ describe('Testes de Integração', () => {
                     expect(res.status).to.equal(HTTPStatus.OK);
                     expect(res.body.payload.id).to.equal(userDefault.id)
                     expect(res.body.payload).to.have.all.keys([
-                        'id', 'email', 'password'
+                        'id', 'name', 'email', 'password'
                     ])
                     id = res.body.payload.id;
                     done(error);

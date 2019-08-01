@@ -31,7 +31,7 @@ var UserService = /** @class */ (function () {
             where: { id: id },
             // Atualiza apenas esses campos
             fildes: [
-                'email', 'password'
+                'name', 'email', 'password'
             ]
         });
     };

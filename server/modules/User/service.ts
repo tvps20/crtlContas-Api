@@ -4,6 +4,7 @@ const db = require('../../models');
 
 class UserService implements IUser {
     public id: number;
+    public name: string;
     public email: string;
     public password: string;
 
@@ -39,7 +40,7 @@ class UserService implements IUser {
             where: {id},
             // Atualiza apenas esses campos
             fildes: [
-                'email', 'password'
+                'name', 'email', 'password'
             ]
         });
     }
