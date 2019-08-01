@@ -17,7 +17,7 @@ class Routes {
 
     getRoutes(app: Application): void{
         app.route('/').get((req, res) => res.send('Hello, world!'));
-        app.route('/token').post(this.tokenRoute.auth);
+        app.route('/login').post(this.tokenRoute.auth);
         this.getUserRoutes(app);
     }
 

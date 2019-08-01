@@ -11,7 +11,7 @@ var Routes = /** @class */ (function () {
     }
     Routes.prototype.getRoutes = function (app) {
         app.route('/').get(function (req, res) { return res.send('Hello, world!'); });
-        app.route('/token').post(this.tokenRoute.auth);
+        app.route('/login').post(this.tokenRoute.auth);
         this.getUserRoutes(app);
     };
     Routes.prototype.getUserRoutes = function (app) {
