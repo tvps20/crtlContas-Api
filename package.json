@@ -9,7 +9,8 @@
     "builded-test": "set node_env=test && node ./build/server/server.js",
     "unit-test": "set node_env=test && mocha --opts ./build/tests/unit/config/mocha.opts ./build/tests/unit/unit.test.js",
     "integration-test": "set node_env=test && mocha --opts ./build/tests/integration/config/mocha.opts ./build/tests/integration/integration.test.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "integration-coverage": "nyc --reporter=html npm run integration-test",
+    "unit-coverage": "nyc --reporter=html npm run unit-test"
   },
   "author": "tvSantiago",
   "license": "ISC",
