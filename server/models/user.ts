@@ -11,10 +11,7 @@ export default function (sequelize, DataTypes) {
 
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true
-            }
+            allowNull: true
         },
 
         email: {
@@ -32,15 +29,7 @@ export default function (sequelize, DataTypes) {
                 notEmpty: true
             }
         }
-    },
-     
-    // {
-    //     // disable the modification of table names; By default, sequelize will automatically
-    //     // transform all passed model names (first parameter of define) into plural.
-    //     // if you don't want that, set the following
-    //     freezeTableName: true
-    // }
-    );
+    });
 
     User.beforeCreate((user) => {
         return hashPassword(user);

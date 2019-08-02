@@ -10,10 +10,7 @@ function default_1(sequelize, DataTypes) {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true
-            }
+            allowNull: true
         },
         email: {
             type: DataTypes.STRING,

@@ -7,6 +7,7 @@ const basename = path.basename(__filename);
 const config = require('../config/env/config')();
 const env = config.env || 'development';
 const db: any = {};
+const modelRelation = require('./relations/relations');
 
 let sequelize;
 if (config.dbURL) {
@@ -33,5 +34,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+modelRelation(db);
 
 module.exports = db;

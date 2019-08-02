@@ -40,7 +40,7 @@ var Handlers = /** @class */ (function () {
         console.log("Error db: " + err);
         res.status(status).json({
             code: 'ERRO-01',
-            message: 'Erro ao criar usuário'
+            message: 'Erro ao criar entidade'
         });
     };
     return Handlers;
