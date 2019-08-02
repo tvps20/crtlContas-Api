@@ -37,7 +37,9 @@ describe('Testes de Integração', () => {
             .then(user => {
                 db.User.create(userTest)
                     .then(() => {
-                        token = jwt.encode({id: user.id}, config.secret);
+                        console.log(`Default User created`)
+                        console.log(`Test User created`)
+                        token = jwt.encode({ id: user.id }, config.secret);
                         done();
                     })
             })
@@ -63,13 +65,13 @@ describe('Testes de Integração', () => {
             };
 
             request(app)
-            .post('/login')
-            .send(credentials)
-            .end((error, res) => {
-                expect(res.status).to.equal(HTTPStatus.OK);
-                expect(res.body.token).to.equal(`${token}`);
-                done(error);
-            })
+                .post('/login')
+                .send(credentials)
+                .end((error, res) => {
+                    expect(res.status).to.equal(HTTPStatus.OK);
+                    expect(res.body.token).to.equal(`${token}`);
+                    done(error);
+                })
         });
 
         it('Não deve gerar Token', done => {
@@ -79,13 +81,13 @@ describe('Testes de Integração', () => {
             };
 
             request(app)
-            .post('/login')
-            .send(credentials)
-            .end((error, res) => {
-                expect(res.status).to.equal(HTTPStatus.UNAUTHORIZED);
-                expect(res.body).to.empty;
-                done(error);
-            })
+                .post('/login')
+                .send(credentials)
+                .end((error, res) => {
+                    expect(res.status).to.equal(HTTPStatus.UNAUTHORIZED);
+                    expect(res.body).to.empty;
+                    done(error);
+                })
         })
     });
 

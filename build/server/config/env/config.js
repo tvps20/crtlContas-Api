@@ -1,1 +1,5 @@
-module.exports = function () { return require("../../config/env/" + process.env.NODE_ENV.trim() + ".env.js"); };
+var extension = 'js';
+if (process.env.NODE_ENV.trim() == 'development') {
+    extension = 'ts';
+}
+module.exports = function () { return require("../env/" + process.env.NODE_ENV.trim() + ".env." + extension); };

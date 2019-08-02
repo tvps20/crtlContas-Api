@@ -43,4 +43,4 @@ var UserService = /** @class */ (function () {
     };
     return UserService;
 }());
-exports.default = UserService;
+exports.default = new UserService();

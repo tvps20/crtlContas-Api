@@ -53,4 +53,4 @@ class UserService implements IUser {
     }
 }
 
-export default UserService;
+export default new UserService();

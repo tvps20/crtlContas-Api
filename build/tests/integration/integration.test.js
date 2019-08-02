@@ -32,6 +32,8 @@ describe('Testes de Integração', function () {
             .then(function (user) {
             db.User.create(userTest)
                 .then(function () {
+                console.log("Default User created");
+                console.log("Test User created");
                 token = jwt.encode({ id: user.id }, config.secret);
                 done();
             });
