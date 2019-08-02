@@ -5,7 +5,7 @@
   "main": "server/server.ts",
   "scripts": {
     "start": "set node_env=development && ts-node ./server/server.ts",
-    "builded": "set node_env=development && node ./build/server/server.js",
+    "builded": "set node_env=production && node ./build/server/server.js",
     "unit-test": "set node_env=test && mocha --opts ./build/tests/unit/config/mocha.opts ./build/tests/unit/unit.test.js",
     "integration-test": "set node_env=test && mocha --opts ./build/tests/integration/config/mocha.opts ./build/tests/integration/integration.test.js",
     "integration-coverage": "nyc --reporter=html npm run integration-test",
