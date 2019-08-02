@@ -13,7 +13,7 @@
       "include": [
         "server/**/*.ts",
         "server/*.ts",
-        "tests/**/*.ts", "server/models/index.js"
+        "tests/**/*.ts"
       ],
       "exclude": [
         "node_modules"
