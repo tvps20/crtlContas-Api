@@ -1,4 +1,4 @@
-# Controle de Contas Api - Api para aplicação de controle de contas desenvolvida em Node com TypeScrip [Repositorio no github]('https://github.com/tvps20/crtlContas-Api/tree/development')
+# Controle de Contas - Api para aplicação de controle de contas desenvolvida em Node com TypeScrip [Repositorio no github]('https://github.com/tvps20/crtlContas-Api/tree/development')
 
 [![Build Status](https://travis-ci.org/tvps20/crtlContas-Api.svg?branch=master)](https://travis-ci.org/tvps20/crtlContas-Api)
 
