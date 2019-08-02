@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import * as jwt from 'jwt-simple';
 import * as HttpStatus from 'http-status';
+import * as bcrypt from 'bcrypt';
 const config = require('../../config/env/config')();
 
 export default function authSuccess(res: Response, credential: any, data: any){
-    const isMatch = (credential.password == data.password);
+    const isMatch = bcrypt.compareSync(credential.password, data.password);
 
     if(isMatch){
         const payload = {id: data.id};

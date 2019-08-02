@@ -39,9 +39,10 @@ class UserService implements IUser {
         return db.User.update(user, {
             where: {id},
             // Atualiza apenas esses campos
-            fildes: [
-                'name', 'email', 'password'
-            ]
+            fildes: ['name', 'email', 'password'],
+            // Criterio para o sequelize saber qual atualizar
+            hooks: true,
+            individualHooks: true
         });
     }
 

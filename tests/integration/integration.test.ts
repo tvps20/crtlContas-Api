@@ -55,7 +55,7 @@ describe('Testes de Integração', () => {
         });
     });
 
-    describe('POST /token', () => {
+    describe('POST /login', () => {
         it('Deve receber um JWT', done => {
             const credentials = {
                 email: userDefault.email,
@@ -63,7 +63,7 @@ describe('Testes de Integração', () => {
             };
 
             request(app)
-            .post('/token')
+            .post('/login')
             .send(credentials)
             .end((error, res) => {
                 expect(res.status).to.equal(HTTPStatus.OK);
@@ -79,7 +79,7 @@ describe('Testes de Integração', () => {
             };
 
             request(app)
-            .post('/token')
+            .post('/login')
             .send(credentials)
             .end((error, res) => {
                 expect(res.status).to.equal(HTTPStatus.UNAUTHORIZED);

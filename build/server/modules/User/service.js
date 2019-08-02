@@ -30,9 +30,10 @@ var UserService = /** @class */ (function () {
         return db.User.update(user, {
             where: { id: id },
             // Atualiza apenas esses campos
-            fildes: [
-                'name', 'email', 'password'
-            ]
+            fildes: ['name', 'email', 'password'],
+            // Criterio para o sequelize saber qual atualizar
+            hooks: true,
+            individualHooks: true
         });
     };
     UserService.prototype.delete = function (id) {

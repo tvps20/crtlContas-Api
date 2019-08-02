@@ -48,14 +48,14 @@ describe('Testes de Integração', function () {
             });
         });
     });
-    describe('POST /token', function () {
+    describe('POST /login', function () {
         it('Deve receber um JWT', function (done) {
             var credentials = {
                 email: userDefault.email,
                 password: userDefault.password
             };
             helpers_1.request(helpers_1.app)
-                .post('/token')
+                .post('/login')
                 .send(credentials)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
@@ -69,7 +69,7 @@ describe('Testes de Integração', function () {
                 password: 'errado'
             };
             helpers_1.request(helpers_1.app)
-                .post('/token')
+                .post('/login')
                 .send(credentials)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.UNAUTHORIZED);

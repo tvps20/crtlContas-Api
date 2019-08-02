@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var jwt = require("jwt-simple");
 var HttpStatus = require("http-status");
+var bcrypt = require("bcrypt");
 var config = require('../../config/env/config')();
 function authSuccess(res, credential, data) {
-    var isMatch = (credential.password == data.password);
+    var isMatch = bcrypt.compareSync(credential.password, data.password);
     if (isMatch) {
         var payload = { id: data.id };
         res.json({
