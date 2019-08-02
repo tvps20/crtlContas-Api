@@ -5,7 +5,7 @@
 ## Começando...
 Clone este repositório:
 ```
-git clone https://github.com/raphaellima8/typescript-course.git ts-api && cd ts-api
+git clone https://github.com/tvps20/crtlContas-Api.git
 ```
 
 Instale as dependências:
