@@ -10,19 +10,22 @@ var CartaoService = /** @class */ (function () {
     };
     CartaoService.prototype.getAll = function () {
         return db.Cartao.findAll({
-            order: ['nome']
+            order: ['nome'],
+            include: [{ model: db.Fatura }]
         })
             .then(interface_1.createCartoes);
     };
     CartaoService.prototype.getById = function (id) {
         return db.Cartao.findOne({
-            where: { id: id }
+            where: { id: id },
+            include: [{ model: db.Fatura }]
         })
             .then(interface_1.createCartao);
     };
     CartaoService.prototype.getByNome = function (nome) {
         return db.Cartao.findOne({
-            where: { nome: nome }
+            where: { nome: nome },
+            include: [{ model: db.Fatura }]
         })
             .then(interface_1.createCartao);
     };

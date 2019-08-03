@@ -1,11 +1,13 @@
 import { ICartao, createCartao, createCartoes } from './interface';
 import * as Bluebird from 'bluebird';
+import { IFatura } from '../Fatura/interface';
 const db = require('../../models');
 
 class CartaoService implements ICartao {
     public id: number;
     public nome: string;
     public bandeira: string;
+    public Faturas?: IFatura[];
 
     create(cartao: any) {
         return db.Cartao.create(cartao);
@@ -13,21 +15,24 @@ class CartaoService implements ICartao {
 
     getAll(): Bluebird<ICartao[]> {
         return db.Cartao.findAll({
-            order: ['nome']
+            order: ['nome'],
+            include: [{ model: db.Fatura }]
         })
             .then(createCartoes);
     }
 
     getById(id: number): Bluebird<ICartao> {
         return db.Cartao.findOne({
-            where: { id }
+            where: { id },
+            include: [{ model: db.Fatura }]
         })
             .then(createCartao);
     }
 
     getByNome(nome: string): Bluebird<ICartao> {
         return db.Cartao.findOne({
-            where: { nome }
+            where: { nome },
+            include: [{ model: db.Fatura }]
         })
             .then(createCartao);
     }

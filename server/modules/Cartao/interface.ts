@@ -1,12 +1,15 @@
-export interface ICartao{
-    id: number,
-    nome: string,
-    bandeira: string
-} 
+import { IFatura } from "../Fatura/interface";
 
-export function createCartao({id, nome, bandeira}: any): ICartao {
+export interface ICartao {
+    id: number;
+    nome: string;
+    bandeira: string;
+    Faturas?: IFatura[];
+}
+
+export function createCartao({ id, nome, bandeira, Faturas }: any): ICartao {
     return {
-        id, nome, bandeira
+        id, nome, bandeira, Faturas
     }
 }
 
