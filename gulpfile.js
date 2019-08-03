@@ -1,4 +1,3 @@
-// Não ta pegando. TODO: Descobrir
 var gulp = require("gulp");
 var clean = require('gulp-clean');
 var ts = require("gulp-typescript");

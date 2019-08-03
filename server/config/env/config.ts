@@ -1,7 +1,6 @@
 let variavelAmbiente: string = process.env.NODE_ENV || 'integration';
 let extension: string = 'js';
 
-
 if (variavelAmbiente == 'integration') {
 
   module.exports = () => require(`../env/${variavelAmbiente}.env.${extension}`);
