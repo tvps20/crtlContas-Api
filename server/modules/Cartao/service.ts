@@ -7,34 +7,34 @@ class CartaoService implements ICartao {
     public nome: string;
     public bandeira: string;
 
-    create(cartao: any){
+    create(cartao: any) {
         return db.Cartao.create(cartao);
     }
 
-    getAll(): Bluebird<ICartao[]>{
+    getAll(): Bluebird<ICartao[]> {
         return db.Cartao.findAll({
             order: ['nome']
         })
-        .then(createCartao);
+            .then(createCartoes);
     }
 
-    getById(id: number): Bluebird<ICartao>{
+    getById(id: number): Bluebird<ICartao> {
         return db.Cartao.findOne({
-            where: {id}
+            where: { id }
         })
-        .then(createCartao);
+            .then(createCartao);
     }
 
-    getByNome(nome: string): Bluebird<ICartao>{
+    getByNome(nome: string): Bluebird<ICartao> {
         return db.Cartao.findOne({
-            where: {nome}
+            where: { nome }
         })
-        .then(createCartao);
+            .then(createCartao);
     }
 
-    update(id: number, cartao: any){
+    update(id: number, cartao: any) {
         return db.Cartao.update(cartao, {
-            where: {id},
+            where: { id },
             // Atualiza apenas esses campos
             fildes: ['nome', 'bandeira'],
             // Criterio para o sequelize saber qual atualizar
@@ -43,9 +43,9 @@ class CartaoService implements ICartao {
         });
     }
 
-    delete(id: number){
+    delete(id: number) {
         return db.Cartao.destroy({
-            where: {id}
+            where: { id }
         });
     }
 }

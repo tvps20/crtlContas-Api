@@ -16,7 +16,7 @@ function default_1(sequelize, DataTypes) {
         },
         bandeira: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         }
     });
     return Cartao;

@@ -17,7 +17,7 @@ export default function (sequelize, DataTypes) {
 
         bandeira: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         }
     })
 

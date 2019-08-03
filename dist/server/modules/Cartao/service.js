@@ -12,7 +12,7 @@ var CartaoService = /** @class */ (function () {
         return db.Cartao.findAll({
             order: ['nome']
         })
-            .then(interface_1.createCartao);
+            .then(interface_1.createCartoes);
     };
     CartaoService.prototype.getById = function (id) {
         return db.Cartao.findOne({
