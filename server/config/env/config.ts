@@ -1,5 +1,15 @@
+let variavelAmbiente: string = process.env.NODE_ENV || 'integration';
 let extension: string = 'js';
-if(process.env.NODE_ENV.trim() == 'development') {
-  extension = 'ts';
+
+if (variavelAmbiente == 'integration') {
+
+  module.exports = () => require(`../env/${variavelAmbiente}.env.${extension}`);
 }
-module.exports = () => require(`../env/${ process.env.NODE_ENV.trim() }.env.${ extension }`);
+else {
+
+  if (variavelAmbiente.trim() == 'development') {
+    extension = 'ts';
+  }
+
+  module.exports = () => require(`../env/${variavelAmbiente.trim()}.env.${extension}`);
+}

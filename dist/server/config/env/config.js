@@ -1,5 +1,11 @@
+var variavelAmbiente = process.env.NODE_ENV || 'integration';
 var extension = 'js';
-if (process.env.NODE_ENV.trim() == 'development') {
-    extension = 'ts';
+if (variavelAmbiente == 'integration') {
+    module.exports = function () { return require("../env/" + variavelAmbiente + ".env." + extension); };
 }
-module.exports = function () { return require("../env/" + process.env.NODE_ENV.trim() + ".env." + extension); };
+else {
+    if (variavelAmbiente.trim() == 'development') {
+        extension = 'ts';
+    }
+    module.exports = function () { return require("../env/" + variavelAmbiente.trim() + ".env." + extension); };
+}
