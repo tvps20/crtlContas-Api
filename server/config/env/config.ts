@@ -1,8 +1,9 @@
+let variavelAmbiente = process.env.NODE_ENV;
 let extension: string = 'js';
-if (process.env.NODE_ENV == 'development') {
+if (variavelAmbiente.trim() == 'development') {
   extension = 'ts';
 }
-if (process.env.NODE_ENV == undefined) {
+if (variavelAmbiente.trim() == undefined) {
   process.env.NODE_ENV = 'test';
 }
-module.exports = () => require(`../env/${process.env.NODE_ENV}.env.${extension}`);
+module.exports = () => require(`../env/${variavelAmbiente.trim()}.env.${extension}`);

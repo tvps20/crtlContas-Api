@@ -5,7 +5,7 @@
   "main": "server/server.ts",
   "scripts": {
     "start": "set node_env=development && set PORT=5000 && ts-node ./server/server.ts",
-    "builded": "set node_env=test && set PORT=5000 && node ./dist/server/server.js",
+    "builded": "set node_env=production && set PORT=5000 && node ./dist/server/server.js",
     "unit-test": "set node_env=test && mocha --opts ./dist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
     "integration-test": "set node_env=test && mocha --opts ./dist/tests/integration/config/mocha.opts ./dist/tests/integration/integration.test.js",
     "unit-coverage": "nyc --reporter=html npm run unit-test",
