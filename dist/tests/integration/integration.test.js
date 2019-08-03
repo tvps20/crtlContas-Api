@@ -6,8 +6,8 @@ var helpers_1 = require("./config/helpers");
 describe('Testes de Integração', function () {
     // Faz com que seja executado no modo extrito para a engine do node entenda as variaveis (let, const, var).
     'use strict';
-    var config = require('../../server/config/env/config')();
-    var db = require('../../server/models');
+    var config = require('../../src/config/env/config')();
+    var db = require('../../src/models');
     var id;
     var token;
     var userTest = {

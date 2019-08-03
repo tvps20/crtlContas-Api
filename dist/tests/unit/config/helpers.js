@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Chai = require("chai");
 var td = require("testdouble");
 var supertest = require('supertest');
-var api_1 = require("../../../server/api/api");
+var api_1 = require("../../../src/api/api");
 var app = api_1.default;
 exports.app = app;
 var request = supertest;

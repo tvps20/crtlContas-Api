@@ -21,13 +21,13 @@ gulp.task("copy-opts", function () {
 });
 
 gulp.task("copy-migration-config", function () {
-  return gulp.src('server/config/config.json')
-    .pipe(gulp.dest('dist/server/config'))
+  return gulp.src('src/config/config.json')
+    .pipe(gulp.dest('dist/src/config'))
 });
 
 gulp.task("build", function () {
-  return gulp.src('server/migrations/*')
-    .pipe(gulp.dest('dist/server/migrations'))
+  return gulp.src('src/migrations/*')
+    .pipe(gulp.dest('dist/src/migrations'))
 });
 
 gulp.task('default', gulp.series('clean', 'compile', 'copy-opts', 'copy-migration-config', 'build'));

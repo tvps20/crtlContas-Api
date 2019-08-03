@@ -1,14 +1,14 @@
 import * as jwt from 'jwt-simple';
 import * as HTTPStatus from 'http-status';
 import { app, request, expect } from './config/helpers';
-import user from '../../server/models/user';
+import user from '../../src/models/user';
 
 describe('Testes de Integração', () => {
 
     // Faz com que seja executado no modo extrito para a engine do node entenda as variaveis (let, const, var).
     'use strict';
-    const config = require('../../server/config/env/config')();
-    const db = require('../../server/models');
+    const config = require('../../src/config/env/config')();
+    const db = require('../../src/models');
 
     let id;
     let token;

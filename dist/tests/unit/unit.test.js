@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var helpers_1 = require("./config/helpers");
-var service_1 = require("../../server/modules/User/service");
-var db = require('../../server/models');
+var service_1 = require("../../src/modules/User/service");
+var db = require('../../src/models');
 describe('Testes Unitarios do Controller', function () {
     var defaultUser = {
         id: 1,

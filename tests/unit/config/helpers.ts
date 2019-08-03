@@ -2,7 +2,7 @@ import * as mocha from 'mocha';
 import * as Chai from 'chai';
 import * as td from 'testdouble';
 const supertest = require('supertest');
-import App from '../../../server/api/api';
+import App from '../../../src/api/api';
 
 const app = App;
 const request = supertest;
