@@ -4,12 +4,14 @@
   "description": "API REST desenvolvida utilizando TypeScript",
   "main": "server/server.ts",
   "scripts": {
-    "start": "set node_env=development && set PORT=5000 && ts-node ./server/server.ts",
-    "builded": "set node_env=production && set PORT=5000 && node ./dist/server/server.js",
-    "unit-test": "set node_env=test && mocha --opts ./dist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
-    "integration-test": "set node_env=test && mocha --opts ./dist/tests/integration/config/mocha.opts ./dist/tests/integration/integration.test.js",
+    "start": "set NODE_ENV=development && set PORT=5000 && ts-node ./server/server.ts",
+    "builded": "set NODE_ENV=test && set PORT=5000 && node ./dist/server/server.js",
+    "unit-test": "set NODE_ENV=test && mocha --opts ./dist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
+    "integration-test": "set NODE_ENV=test && mocha --opts ./dist/tests/integration/config/mocha.opts ./dist/tests/integration/integration.test.js",
     "unit-coverage": "nyc --reporter=html npm run unit-test",
-    "integration-coverage": "nyc --reporter=html npm run integration-test"
+    "integration-coverage": "nyc --reporter=html npm run integration-test",
+    "unit-test-travis": "set NODE_ENV=integration && mocha --opts ./dist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
+    "integration-test-travis": "set NODE_ENV=integration && mocha --opts ./dist/tests/integration/config/mocha.opts ./dist/tests/integration/integration.test.js"
   },
   "author": "tvSantiago",
   "license": "ISC",

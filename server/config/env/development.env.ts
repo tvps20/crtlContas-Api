@@ -5,7 +5,7 @@ module.exports = {
     username: 'postgres',
     password: 'postgres',
     host: 'localhost',
-    serverPort: 3000,
+    serverPort: process.env.PORT || 3000,
     pgPort: 5432,
     dbURL: `postgres://postgres:postgres@localhost:5432/ts-api`,
     secret: 'c7rlc0n745'
