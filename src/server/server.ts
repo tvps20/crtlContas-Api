@@ -2,7 +2,6 @@ import * as http from 'http';
 import Api from '../api/api';
 const config = require('../config/env/config')();
 
-
 export default class Server {
 
     private db;
