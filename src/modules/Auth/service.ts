@@ -4,7 +4,7 @@ import UserService from '../User/service';
 import ResponseHandlers from '../../api/handlers/response-handlers';
 import * as HttpStatus from 'http-status';
 
-class TokenRouter {
+class AuthService {
 
     async auth(req: Request, res: Response) {
         const { email, password } = req.body;
@@ -23,4 +23,4 @@ class TokenRouter {
     }
 }
 
-export default new TokenRouter();
+export default new AuthService();

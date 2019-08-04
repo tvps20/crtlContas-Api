@@ -38,10 +38,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var service_1 = require("../User/service");
 var response_handlers_1 = require("../../api/handlers/response-handlers");
 var HttpStatus = require("http-status");
-var TokenRouter = /** @class */ (function () {
-    function TokenRouter() {
+var AuthService = /** @class */ (function () {
+    function AuthService() {
     }
-    TokenRouter.prototype.auth = function (req, res) {
+    AuthService.prototype.auth = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var _a, email, password, user, error_1;
             return __generator(this, function (_b) {
@@ -70,6 +70,6 @@ var TokenRouter = /** @class */ (function () {
             });
         });
     };
-    return TokenRouter;
+    return AuthService;
 }());
-exports.default = new TokenRouter();
+exports.default = new AuthService();
