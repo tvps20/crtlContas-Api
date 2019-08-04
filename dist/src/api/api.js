@@ -5,24 +5,37 @@ var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var routes_1 = require("./routes/routes");
 var response_handlers_1 = require("./handlers/response-handlers");
-var auth_1 = require("../auth");
+var service_1 = require("../modules/Auth/service");
 var Api = /** @class */ (function () {
     function Api() {
-        this.express = express();
-        this.middleware();
+        this.authService = new service_1.default;
+        this._express = express();
+        this.configureExpress();
+        this.routes = new routes_1.default(this.express, this.authService);
+        this.routes.initRoutes();
     }
-    Api.prototype.middleware = function () {
+    Object.defineProperty(Api.prototype, "express", {
+        get: function () {
+            return this._express;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Api.prototype.configureExpress = function () {
+        this.express.use(this.configHeaders.bind(this));
         // O morgan gera log no console para cada requisição
         this.express.use(morgan('dev'));
         this.express.use(bodyParser.urlencoded({ extended: true }));
         this.express.use(bodyParser.json());
         this.express.use(response_handlers_1.default.errorHandlerApi);
-        this.express.use(auth_1.default.config().initialize());
-        this.router(this.express, auth_1.default);
+        this.express.use(this.authService.config().initialize());
     };
-    Api.prototype.router = function (app, auth) {
-        routes_1.default.initRoutes(app, auth);
+    Api.prototype.configHeaders = function (req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+        next();
     };
     return Api;
 }());
-exports.default = new Api().express;
+exports.default = Api;

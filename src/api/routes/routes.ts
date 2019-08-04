@@ -1,44 +1,48 @@
 import { Application } from 'express';
-import UserRouter from '../../modules/User/routes';
 import AuthService from '../../modules/Auth/service';
-import CartaoRouter from '../../modules/Cartao/routes';
-import FaturaRouter from '../../modules/Fatura/routes';
+import UserController from '../../modules/User/controller';
+import CartaoController from '../../modules/Cartao/controller';
+import FaturaController from '../../modules/Fatura/controller';
 
-class Routes {
+export default class Routes {
 
-    constructor() { }
+    private app: Application;
+    private authService: AuthService;
 
-    initRoutes(app: Application, auth: any): void {
-        app.route('/').get((req, res) => res.send('Hello, world!'));
-        app.route('/login').post(AuthService.auth);
-        this.getUserRoutes(app, auth);
-        this.getCartaoRoutes(app, auth);
-        this.getFaturaoRoutes(app, auth);
+    constructor(app: Application, auth: AuthService) {
+        this.app = app;
+        this.authService = auth;
     }
 
-    private getUserRoutes(app: Application, auth: any): void {
-        app.route('/api/users').post(UserRouter.create);
-        app.route('/api/users').all(auth.config().authenticate()).get(UserRouter.index);
-        app.route('/api/users/:id').all(auth.config().authenticate()).get(UserRouter.findOnde);
-        app.route('/api/users/:id').all(auth.config().authenticate()).put(UserRouter.update);
-        app.route('/api/users/:id').all(auth.config().authenticate()).delete(UserRouter.delete);
+    initRoutes(): void {
+        this.app.route('/').get((req, res) => res.send('Hello, world!'));
+        this.app.route('/login').post(this.authService.auth);
+        this.getUserRoutes();
+        this.getCartaoRoutes();
+        this.getFaturaoRoutes();
     }
 
-    private getCartaoRoutes(app: Application, auth: any): void {
-        app.route('/api/cartao').get(CartaoRouter.index);
-        app.route('/api/cartao').post(CartaoRouter.create);
-        app.route('/api/cartao/:id').get(CartaoRouter.findOnde);
-        app.route('/api/cartao/:id').put(CartaoRouter.update);
-        app.route('/api/cartao/:id').delete(CartaoRouter.delete);
+    private getUserRoutes(): void {
+        this.app.route('/api/users').post(UserController.createUser);
+        this.app.route('/api/users').all(this.authService.config().authenticate()).get(UserController.getAll);
+        this.app.route('/api/users/:id').all(this.authService.config().authenticate()).get(UserController.getById);
+        this.app.route('/api/users/:id').all(this.authService.config().authenticate()).put(UserController.updateUser);
+        this.app.route('/api/users/:id').all(this.authService.config().authenticate()).delete(UserController.deleteUser);
     }
 
-    private getFaturaoRoutes(app: Application, auth: any): void {
-        app.route('/api/Fatura').get(FaturaRouter.index);
-        app.route('/api/Fatura').post(FaturaRouter.create);
-        app.route('/api/Fatura/:id').get(FaturaRouter.findOnde);
-        app.route('/api/Fatura/:id').put(FaturaRouter.update);
-        app.route('/api/Fatura/:id').delete(FaturaRouter.delete);
+    private getCartaoRoutes(): void {
+        this.app.route('/api/cartao').get(CartaoController.getAll);
+        this.app.route('/api/cartao').post(CartaoController.createCartao);
+        this.app.route('/api/cartao/:id').get(CartaoController.getById);
+        this.app.route('/api/cartao/:id').put(CartaoController.updateCartao);
+        this.app.route('/api/cartao/:id').delete(CartaoController.deleteCartao);
+    }
+
+    private getFaturaoRoutes(): void {
+        this.app.route('/api/Fatura').get(FaturaController.getAll);
+        this.app.route('/api/Fatura').post(FaturaController.createCartao);
+        this.app.route('/api/Fatura/:id').get(FaturaController.getById);
+        this.app.route('/api/Fatura/:id').put(FaturaController.updateCartao);
+        this.app.route('/api/Fatura/:id').delete(FaturaController.deleteCartao);
     }
 }
-
-export default new Routes();

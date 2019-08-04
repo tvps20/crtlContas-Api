@@ -35,12 +35,39 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var passport_jwt_1 = require("passport-jwt");
+var passport = require("passport");
 var service_1 = require("../User/service");
 var response_handlers_1 = require("../../api/handlers/response-handlers");
 var HttpStatus = require("http-status");
+var config = require('../../config/env/config')();
 var AuthService = /** @class */ (function () {
     function AuthService() {
     }
+    AuthService.prototype.config = function () {
+        var opts = {
+            jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderWithScheme('JWT'),
+            secretOrKey: config.secret
+        };
+        passport.use(new passport_jwt_1.Strategy(opts, function (jwtPayload, done) {
+            service_1.default.getById(jwtPayload.id).then(function (user) {
+                if (user) {
+                    return done(null, {
+                        id: user.id,
+                        email: user.email
+                    });
+                }
+                return done(null, false);
+            })
+                .catch(function (error) {
+                done(error, null);
+            });
+        }));
+        return {
+            initialize: function () { return passport.initialize(); },
+            authenticate: function () { return passport.authenticate('jwt', { session: false }); }
+        };
+    };
     AuthService.prototype.auth = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var _a, email, password, user, error_1;
@@ -72,4 +99,4 @@ var AuthService = /** @class */ (function () {
     };
     return AuthService;
 }());
-exports.default = new AuthService();
+exports.default = AuthService;

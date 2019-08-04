@@ -1,7 +1,6 @@
 import * as jwt from 'jwt-simple';
 import * as HTTPStatus from 'http-status';
 import { app, request, expect } from './config/helpers';
-import user from '../../src/models/user';
 
 describe('Testes de Integração', () => {
 
