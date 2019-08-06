@@ -6,13 +6,13 @@
   "scripts": {
     "start": "set NODE_ENV=development && ts-node ./bootstrap.ts",
     "builded": "set NODE_ENV=test && node ./dist/bootstrap.js",
-    "debug": "node --nolazy --inspect-brk=3000 ./dist/bootstrap.js",
-    "unit-test": "set NODE_ENV=test && mocha --opts ./dist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
-    "integration-test": "set NODE_ENV=test && mocha --opts ./dist/tests/integration/config/mocha.opts ./dist/tests/integration/integration.test.js",
+    "debug": "set NODE_ENV=test && node --nolazy --inspect-brk=3000 ./dist/bootstrap.js",
+    "unit-test": "set NODE_ENV=test && mocha --opts ./dist/tests/unit/config/mocha.opts ./dist/tests/unit/**/*.test.js",
+    "integration-test": "set NODE_ENV=test && mocha --opts ./dist/tests/integration/config/mocha.opts ./dist/tests/integration/**/*.test.js",
     "unit-coverage": "nyc --reporter=html npm run unit-test",
     "integration-coverage": "nyc --reporter=html npm run integration-test",
-    "unit-test-travis": "set NODE_ENV=integration && mocha --opts ./dist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
-    "integration-test-travis": "set NODE_ENV=integration && mocha --opts ./dist/tests/integration/config/mocha.opts ./dist/tests/integration/integration.test.js"
+    "unit-test-travis": "set NODE_ENV=integration && mocha --opts ./dist/tests/unit/config/mocha.opts ./dist/tests/unit/**/*.test.js",
+    "integration-test-travis": "set NODE_ENV=integration && mocha --opts ./dist/tests/integration/config/mocha.opts ./dist/tests/integration/**/*.test.js"
   },
   "author": "tvSantiago",
   "license": "ISC",

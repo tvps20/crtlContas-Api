@@ -17,6 +17,7 @@ gulp.task("clean", function () {
 gulp.task("copy-opts", function () {
   return gulp.src('tests/unit/config/mocha.opts')
     .pipe(gulp.dest('dist/tests/unit/config'))
+    .pipe(gulp.src('tests/integration/config/mocha.opts'))
     .pipe(gulp.dest('dist/tests/integration/config'))
 });
 
