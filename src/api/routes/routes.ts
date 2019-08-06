@@ -9,9 +9,9 @@ export default class Routes {
     private app: Application;
     private authService: AuthService;
 
-    constructor(app: Application, auth: AuthService) {
+    constructor(app: Application, authService: AuthService) {
         this.app = app;
-        this.authService = auth;
+        this.authService = authService;
     }
 
     initRoutes(): void {

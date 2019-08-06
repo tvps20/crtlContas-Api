@@ -6,8 +6,6 @@ import UserService from './service';
 
 class UserController {
 
-    constructor() { }
-
     getAll(req: Request, res: Response) {
         UserService.getAll()
             .then(_.partial(ResponseHandlers.onSuccess, res, HttpStatus.OK))

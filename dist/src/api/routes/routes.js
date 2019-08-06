@@ -4,9 +4,9 @@ var controller_1 = require("../../modules/User/controller");
 var controller_2 = require("../../modules/Cartao/controller");
 var controller_3 = require("../../modules/Fatura/controller");
 var Routes = /** @class */ (function () {
-    function Routes(app, auth) {
+    function Routes(app, authService) {
         this.app = app;
-        this.authService = auth;
+        this.authService = authService;
     }
     Routes.prototype.initRoutes = function () {
         this.app.route('/').get(function (req, res) { return res.send('Hello, world!'); });
